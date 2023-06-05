@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/CollisionServices/bin/Debug
+/CollisionServices/obj
+/.vs
+/Collision.Tests/bin/Debug/net48
+/Collision.Tests/obj
+/CollisionApp/bin/Debug
+/CollisionApp/obj/Debug
+/packages

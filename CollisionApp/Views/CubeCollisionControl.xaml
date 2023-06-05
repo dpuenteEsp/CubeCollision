@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="CollisionApp.Views.CubeCollisionControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"     
+             xmlns:Utils="clr-namespace:CollisionApp.Utils"
+             mc:Ignorable="d" 
+             Width="400" Height="800">
+    <UserControl.Resources>
+        <Utils:NotStringEmptyToBooleanConverter x:Key="NotStringEmptyToBooleanConverter"/>
+        <Style TargetType="TextBox">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <Border BorderBrush="Red" BorderThickness="1">
+                                <AdornedElementPlaceholder />
+                            </Border>
+                            <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="6,3" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="20,10,10,10">
+            <TextBlock Text="Cube 1 Dimensions: "/>
+            <TextBox Text="{Binding Cube1Dimensions, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="100"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Text="Cube 1 Position: " Margin="20,10,10,10"/>
+        <Grid Grid.Row="2" Margin="30,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="X: "/>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Cube1X, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="30" Height="20" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Y: "/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Cube1Y, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="30" Height="20" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Z: "/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Cube1Z, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="30" Height="20" VerticalAlignment="Top"/>
+        </Grid>
+        
+        
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="20,10,10,10">
+            <TextBlock Text="Cube 2 Dimensions: "/>
+            <TextBox Text="{Binding Cube2Dimensions, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="100"/>
+        </StackPanel>
+
+        <TextBlock Grid.Row="4" Text="Cube 2 Position: " Margin="20,10,10,10"/>
+        <Grid Grid.Row="5" Margin="20,10,10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="X: "/>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Cube2X, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="30" Height="20" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Y: "/>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Cube2Y, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="30" Height="20" VerticalAlignment="Top"/>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Z: "/>
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Cube2Z, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" Width="30" Height="20" VerticalAlignment="Top"/>
+        </Grid>
+
+        <Button Grid.Row="6" Content="Check Collision" Command="{Binding CheckCollisionCommand}" IsEnabled="{Binding Error, Converter={StaticResource NotStringEmptyToBooleanConverter}}" />
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Collision Result: " />
+            <TextBlock Text="{Binding CollisionResult, StringFormat='{}{0}'}"
+                   FontWeight="Bold" Foreground="Green" HorizontalAlignment="Right" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Intersected Volume: " />
+            <TextBlock Text="{Binding IntersectedVolume, StringFormat='{}{0:F2}'}"
+                   FontWeight="Bold" Foreground="Blue" HorizontalAlignment="Right" />
+        </StackPanel>
+    </Grid>
+</UserControl>
